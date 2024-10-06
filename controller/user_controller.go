@@ -11,6 +11,13 @@ import (
 )
 
 // Get all users
+// @Summary Get all users
+// @Description Get a list of all users
+// @Tags users
+// @Accept json
+// @Produce json
+// @Success 200 {array} models.User
+// @Router /users [get]
 func GetUsers(c *gin.Context) {
     users, err := service.GetAllUsers()
     if err != nil {
@@ -31,7 +38,16 @@ func GetUserByID(c *gin.Context) {
     c.JSON(http.StatusOK, user)
 }
 
-// Create a new user
+
+// CreateUsers godoc
+// @Summary Create a new book
+// @Description Create a User with the given details
+// @Tags user
+// @Accept json
+// @Produce json
+// @Param book body models.User true "Users details"
+// @Success 200 {object} models.User
+// @Router /users [post]
 func CreateUser(c *gin.Context) {
     var user models.User
     if err := c.ShouldBindJSON(&user); err != nil {

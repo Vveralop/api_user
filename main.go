@@ -12,6 +12,11 @@ import (
 	"github.com/joho/godotenv" // Para cargar el archivo .env
 )
 
+// @title User API
+// @version 1.0
+// @description This is a sample server for managing Users.
+// @host localhost:8080
+// @BasePath /
 func main() {
     // Cargar el archivo .env
     err := godotenv.Load()
