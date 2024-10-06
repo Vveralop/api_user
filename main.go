@@ -3,9 +3,11 @@ package main
 import (
 	"gogin/config"
 	"log"
+	"time"
 
 	"gogin/routes"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv" // Para cargar el archivo .env
 )
@@ -22,6 +24,19 @@ func main() {
 
     // Crear una nueva instancia de Gin
     router := gin.Default()
+
+    // Configuración de CORS
+    corsConfig := cors.Config{
+        AllowOrigins:     []string{"http://localhost:3000"}, // Cambia esto a tus dominios permitidos
+        AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowHeaders:     []string{"Origin", "Content-Type", "Accept"},
+        ExposeHeaders:    []string{"Content-Length"},
+        AllowCredentials: true, // Permitir credenciales si es necesario
+        MaxAge:           12 * time.Hour, // Opcional: define el tiempo que el navegador debe cachear la respuesta CORS
+    }
+    
+    // Usar el middleware CORS
+    router.Use(cors.New(corsConfig))
 
     // Registrar las rutas
     routes.UserRoutes(router)
