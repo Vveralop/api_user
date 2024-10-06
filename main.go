@@ -10,6 +10,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv" // Para cargar el archivo .env
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // @title User API
@@ -45,6 +46,9 @@ func main() {
 
     // Registrar las rutas
     routes.UserRoutes(router)
+
+    // Integrar Swagger
+    router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
     // Iniciar el servidor en el puerto 8080
     router.Run(":8080")
